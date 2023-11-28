@@ -1,5 +1,4 @@
-import pydantic as pydantic
-import response.response as r
+from backend.backend.response import response as r
 
 
 class SteamGame:
