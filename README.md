@@ -6,7 +6,7 @@ The application allows users to see their profile, list of friends and games.
 ## Table of Contents
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [API Endpoints](#APIEndpoints)
+- [API Endpoints](#apiendpoints)
 - [License](#license)
 
 ## Installation
