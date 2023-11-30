@@ -15,7 +15,7 @@ def get_response(url: str):
         data = response.json()
         return data
     else:
-        print(f"Ошибочка при запросе:{response.status_code}")
+        raise Exception(f"Ошибочка при запросе: {response.status_code}")
 
 
 def steam_user_info(steamid):
@@ -56,6 +56,8 @@ def get_steam_profiles(steamid=[76561197960435530]):
 
 def get_friend_list(steamid):
     data_dict = steam_user_friends_list(int(steamid))["friendslist"]["friends"]
+    if not data_dict:
+        raise Exception()
     newList = []
     for info in data_dict:
         newList.append(info['steamid'])
@@ -64,8 +66,10 @@ def get_friend_list(steamid):
 
 def get_game_list(steamid):
     res = []
+
     games = steam_list_of_games(steamid)['response']['games']
-    print(games)
+    if not games:
+        raise Exception()
     for game in games:
         icon_hash = str(game.get('img_icon_url', "-"))
         game_id = str(game.get('appid', "-"))
@@ -78,7 +82,6 @@ def get_game_list(steamid):
 
 def get_profile(steamid):
     profile = steam_user_info(steamid)['response']['players'][0]
-
     res = {'profileurl': str(profile.get('profileurl', "-")),
            'real_name': str(profile.get('realname', "-")),
            'personaname': str(profile.get('personaname', "-")),
